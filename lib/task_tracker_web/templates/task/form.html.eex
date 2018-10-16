@@ -5,25 +5,35 @@
     </div>
   <% end %>
 
-  <%= label f, :title %>
-  <%= text_input f, :title %>
-  <%= error_tag f, :title %>
+  <div class="form-group">
+    <%= label f, :title %>
+    <%= text_input f, :title, class: "form-control" %>
+    <%= error_tag f, :title %>
+  </div>
 
-  <%= label f, :desc %>
-  <%= textarea f, :desc %>
-  <%= error_tag f, :desc %>
+  <div class="form-group">
+    <%= label f, :desc %>
+    <%= textarea f, :desc, class: "form-control" %>
+    <%= error_tag f, :desc %>
+  </div>
 
-  <%= label f, :user %>
-  <%= number_input f, :user %>
-  <%= error_tag f, :user %>
+  <div class="form-group">
+    <%= label f, :user %>
+    <%= text_input f, :user, class: "form-control" %>
+    <%= error_tag f, :user %>
+  </div>
 
-  <%= label f, :time %>
-  <%= number_input f, :time %>
-  <%= error_tag f, :time %>
+  <div class="form-group">
+    <%= label f, :time %>
+    <%= number_input f, :time, step: "any", class: "form-control", default: "0" %>
+    <%= error_tag f, :time %>
+  </div>
 
-  <%= label f, :completed %>
-  <%= text_input f, :completed %>
-  <%= error_tag f, :completed %>
+  <div class="form-group">
+    <%= label f, :completed %>
+    <%= text_input f, :completed, class: "form-control" %>
+    <%= error_tag f, :completed %>
+  </div>
 
   <div>
     <%= submit "Save" %>

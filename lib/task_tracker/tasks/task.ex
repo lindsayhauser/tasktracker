@@ -3,12 +3,12 @@ defmodule TaskTracker.Tasks.Task do
   import Ecto.Changeset
 
 
-  schema "tasks" do
+  schema "task_data" do
     field :completed, :string
     field :desc, :string
     field :time, :integer
     field :title, :string
-    field :user, :integer
+    field :user, :string
 
     timestamps()
   end
