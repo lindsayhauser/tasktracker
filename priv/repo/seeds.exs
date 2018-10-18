@@ -12,6 +12,8 @@
 
 alias TaskTracker.Repo
 alias TaskTracker.Users.User
+alias TaskTracker.Tasks.Task
 
 Repo.insert!(%User{email: "alice@example.com", admin: true})
 Repo.insert!(%User{email: "bob@example.com", admin: false})
+Repo.insert!(%Task{completed: false, desc: "The newest homework for object oriented design", time_minutes: 15, time_hours: 1, title: "Finish OOD Homework", user: "alice@example.com"})

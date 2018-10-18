@@ -13,13 +13,9 @@
 
   <li>
     <strong>User Assigned:</strong>
-    <%= @task.user_id %>
+    <%= @task.user %>
   </li>
 
-  <li>
-    <strong>User Assignedasdfasdf:</strong>
-    <%= @user_list %>
-  </li>
 
   <li>
     <strong>Time Hours:</strong>
@@ -27,7 +23,7 @@
   </li>
 
   <li>
-    <strong>Time Minutes:</strong>
+    <strong>Time Minutes (15 minute increments):</strong>
     <%= @task.time_minutes %>
   </li>
 

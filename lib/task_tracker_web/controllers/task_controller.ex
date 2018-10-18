@@ -7,9 +7,9 @@ defmodule TaskTrackerWeb.TaskController do
 
 
   def index(conn, _params) do
-    IO.puts("Got here")
+    IO.puts("Got here in tasks controller index")
     tasks = Tasks.list_task_list()
-    IO.puts("Got here after tasks")
+    IO.puts("Got here after tasks cnotroller index")
     render(conn, "index.html", tasks: tasks)
   end
 

@@ -50,7 +50,6 @@ defmodule TaskTracker.Tasks do
 
   """
   def create_task(attrs \\ %{}) do
-    IO.puts(attrs)
     %Task{}
     |> Task.changeset(attrs)
     |> Repo.insert()
