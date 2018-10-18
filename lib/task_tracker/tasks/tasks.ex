@@ -9,15 +9,15 @@ defmodule TaskTracker.Tasks do
   alias TaskTracker.Tasks.Task
 
   @doc """
-  Returns the list of task_list.
+  Returns the list of tasks.
 
   ## Examples
 
-      iex> list_task_list()
+      iex> list_tasks()
       [%Task{}, ...]
 
   """
-  def list_task_list do
+  def list_tasks do
     Repo.all(Task)
   end
 
@@ -50,7 +50,6 @@ defmodule TaskTracker.Tasks do
 
   """
   def create_task(attrs \\ %{}) do
-    IO.puts(attrs)
     %Task{}
     |> Task.changeset(attrs)
     |> Repo.insert()

@@ -18,20 +18,26 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :user %>
-    <%= text_input f, :user, class: "form-control" %>
-    <%= error_tag f, :user %>
+    <%= label f, :user_id %>
+    <%= number_input f, :user_id, class: "form-control" %>
+    <%= error_tag f, :user_id %>
   </div>
 
   <div class="form-group">
-    <%= label f, :time %>
-    <%= number_input f, :time, step: "any", class: "form-control", default: "0" %>
+    <%= label f, :time_hours %>
+    <%= number_input f, :time_hours, step: "any", class: "form-control", default: 0 %>
+    <%= error_tag f, :time %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :time_minutes %>
+    <%= number_input f, :time_minutes, step: 15, class: "form-control", default: 0 %>
     <%= error_tag f, :time %>
   </div>
 
   <div class="form-group">
     <%= label f, :completed %>
-    <%= text_input f, :completed, class: "form-control" %>
+    <%= checkbox f, :completed %>
     <%= error_tag f, :completed %>
   </div>
 

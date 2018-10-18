@@ -3,12 +3,12 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Desc</th>
-      <th>User</th>
-      <th>Time(in hours)</th>
-      <th>Completed</th>
+      <th>Task:</th>
 
+      <th>User Assigned To:</th>
+      <th>Completed?</th>
+      <th>Hours:</th>
+      <th>Minutes:</th>
       <th></th>
     </tr>
   </thead>
@@ -16,11 +16,11 @@
 <%= for task <- @tasks do %>
     <tr>
       <td><%= task.title %></td>
-      <td><%= task.desc %></td>
-      <td><%= task.user %></td>
-      <td><%= task.time %></td>
-      <td><%= task.completed %></td>
 
+      <td><%= task.user_id %></td>
+      <td><%= task.completed %></td>
+      <td><%= task.time_hours %></td>
+      <td><%= task.time_minutes %></td>
       <td>
         <%= link "Show", to: Routes.task_path(@conn, :show, task), class: "btn btn-secondary" %>
         <%= link "Edit", to: Routes.task_path(@conn, :edit, task), class: "btn btn-info" %>

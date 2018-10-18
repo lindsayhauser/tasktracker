@@ -1,5 +1,4 @@
 <h1>Show Task</h1>
-
 <ul>
 
   <li>
@@ -13,17 +12,22 @@
   </li>
 
   <li>
-    <strong>User:</strong>
-    <%= @task.user %>
+    <strong>User Assigned:</strong>
+    <%= @task.user_id %>
   </li>
 
   <li>
-    <strong>Time:</strong>
-    <%= @task.time %>
+    <strong>Time Hours:</strong>
+    <%= @task.time_hours %>
   </li>
 
   <li>
-    <strong>Completed:</strong>
+    <strong>Time Minutes:</strong>
+    <%= @task.time_minutes %>
+  </li>
+
+  <li>
+    <strong>Completed?:</strong>
     <%= @task.completed %>
   </li>
 

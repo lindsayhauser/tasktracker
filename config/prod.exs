@@ -1,3 +1,6 @@
+# // Use http://www.ccs.neu.edu/home/ntuck/courses/2018/09/cs4550/notes/11-add-users/notes.html
+# // TODO cleanup
+
 use Mix.Config
 
 # For production, don't forget to configure the url host
@@ -10,8 +13,11 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :task_tracker, TaskTrackerWeb.Endpoint,
+  server: true,
+  root: ".",
+  version: Application.spec(:phoenix_distillery, :vsn),
   http: [:inet6, port: System.get_env("PORT") || 4000],
-  url: [host: "example.com", port: 80],
+  url: [host: "tasks1.lindsayhauser.com", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
@@ -68,4 +74,39 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs which should be versioned
 # separately.
-import_config "prod.secret.exs"
+#import_config "prod.secret.exs"
+
+use Mix.Config
+
+# In this file, we keep production configuration that
+# you'll likely want to automate and keep away from
+# your version control system.
+#
+# You should document the content of this
+# file or create a script for recreating it, since it's
+# kept out of version control and might be hard to recover
+# or recreate for your teammates (or yourself later on).
+
+# https://github.com/NatTuck/husky_shop/blob/2-deploy/config/prod.exs
+get_secret = fn name ->
+  base = Path.expand("~/.config/task_tracker")
+  File.mkdir_p!(base)
+  path = Path.join(base, name)
+  unless File.exists?(path) do
+    secret = Base.encode16(:crypto.strong_rand_bytes(32))
+    File.write!(path, secret)
+  end
+  String.trim(File.read!(path))
+end
+
+config :task_tracker, TaskTrackerWeb.Endpoint,
+  secret_key_base: get_secret.("key_base");
+
+  #secret_key_base: "A4VpDq4vRmYBqHxxWMAKtIqNgNtRtKfjHvUWIlYgO4nP3ylP2DbPIwXXDC7aOLtw"
+
+# Configure your database
+config :task_tracker, TaskTracker.Repo,
+  username: "task_tracker",
+  password: get_secret.("db_pass"),
+  database: "task_tracker_prod",
+  pool_size: 15
