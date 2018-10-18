@@ -17,6 +17,11 @@
   </li>
 
   <li>
+    <strong>User Assignedasdfasdf:</strong>
+    <%= @user_list %>
+  </li>
+
+  <li>
     <strong>Time Hours:</strong>
     <%= @task.time_hours %>
   </li>
