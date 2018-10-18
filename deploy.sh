@@ -5,20 +5,20 @@ export MIX_ENV=prod
 
 echo "Building..."
 
-mkdir -p ~/.config
+mkdir -p ~/.config/task_tracker
 
 mix deps.get
-mix compile
-(cd assets && npm install)
-(cd assets && webpack --mode production)
-mix phx.digest
 
+(cd assets && npm install)
+(cd assets && node_modules/.bin/webpack --mode production)
+mix phx.digest
+mix compile
 # Run so db starts up
 mix run priv/repo/seeds.exs
 
 echo "Generating release..."
-mix release
+mix release --env=prod
 
 echo "Starting app..."
 
-_build/prod/rel/memory/bin/memory start
+_build/prod/rel/task_tracker/bin/task_tracker foreground
