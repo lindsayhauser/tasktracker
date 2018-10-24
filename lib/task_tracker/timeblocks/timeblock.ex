@@ -6,7 +6,6 @@ defmodule TaskTracker.Timeblocks.Timeblock do
   schema "timeblocks" do
     field :time_end, :naive_datetime
     field :time_start, :naive_datetime
-    #field :task_id, :id
     belongs_to :task, TaskTracker.Tasks.Task
 
     timestamps()
@@ -15,7 +14,7 @@ defmodule TaskTracker.Timeblocks.Timeblock do
   @doc false
   def changeset(timeblock, attrs) do
     timeblock
-    |> cast(attrs, [:time_start, :time_end])
-    |> validate_required([:time_start, :time_end])
+    |> cast(attrs, [:time_start, :time_end, :task_id])
+    |> validate_required([:time_start, :time_end, :task_id])
   end
 end

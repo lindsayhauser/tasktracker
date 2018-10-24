@@ -32,7 +32,7 @@ defmodule TaskTrackerWeb.Router do
 
   scope "/ajax", TaskTrackerWeb do
     pipe_through :ajax
-    resources "/ratings", RatingController, except: [:new, :edit]
+    resources "/timeblocks", TimeblockController, except: [:new, :edit]
   end
 
   # Other scopes may use custom stacks.

@@ -1,18 +1,75 @@
-<h1>Show User</h1>
+<h1>User Profile:</h1>
 
-<ul>
+<h4>
+  <strong>Username/Email:</strong>
+  <%= @user.email %>
+</h4>
 
-  <li>
-    <strong>Email:</strong>
-    <%= @user.email %>
-  </li>
+<h6>
+  <strong>Admin:</strong>
+  <%= @user.admin %>
+</h6>
 
-  <li>
-    <strong>Admin:</strong>
-    <%= @user.admin %>
-  </li>
+<h4>
+  <strong>Manager:</strong>
+  <%= @manager.email%>
+</h4>
 
-</ul>
+<br>
+
+<h4>
+  <strong>
+    <%= @user.email %> Manages:
+  </strong>
+</h4>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+
+    </tr>
+  </thead>
+  <tbody>
+  <%= for user <- @user.employees do %>
+        <tr>
+          <td><%= user.email %></td>
+          <td><%= link "Show", to: Routes.user_path(@conn, :show, user.id), class: "btn btn-primary" %> </td>
+        </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h4>
+  <strong>
+    Task Report:
+  </strong>
+</h4>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Assigned To:</th>
+      <th>Title:</th>
+      <th>Completed?</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for task <- @tasks do %>
+    <tr>
+      <td><%= task.user.email %></td>
+      <td><%= task.title %></td>
+      <td><%= task.completed %></td>
+      <td>
+        <%= link "Show", to: Routes.task_path(@conn, :show, task), class: "btn btn-secondary" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
 
 <span><%= link "Edit", to: Routes.user_path(@conn, :edit, @user) %></span>
 <span><%= link "Back", to: Routes.user_path(@conn, :index) %></span>

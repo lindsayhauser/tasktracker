@@ -7,6 +7,8 @@ defmodule TaskTracker.Tasks do
   alias TaskTracker.Repo
 
   alias TaskTracker.Tasks.Task
+  alias TaskTracker.Timeblocks.Timeblock
+
 
   @doc """
   Returns the list of task_list.
@@ -19,6 +21,12 @@ defmodule TaskTracker.Tasks do
   """
   def list_task_list do
     Repo.all(Task)
+  end
+
+# Get all of the tasks who's userid is passed in
+  def getTasks(ids) do
+
+    Task |> where([t], t.user_id in ^ids) |> Repo.all |> Repo.preload([:user])
   end
 
   @doc """
@@ -35,7 +43,12 @@ defmodule TaskTracker.Tasks do
       ** (Ecto.NoResultsError)
 
   """
-  def get_task!(id), do: Repo.get!(Task, id)
+  # def get_task!(id), do: Repo.get!(Task, id)
+  def get_task!(id) do
+  Repo.one! from t in Timeblock,
+    where: t.id == ^id,
+    preload: [:timeblock]
+end
 
   @doc """
   Creates a task.

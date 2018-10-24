@@ -21,6 +21,12 @@ defmodule TaskTracker.Users do
     Repo.all(User)
   end
 
+  def list_users_managed_over(id) do
+    query = from u in User,
+     where: u.id ==^id
+    Repo.all(query)
+  end
+
   @doc """
   Gets a single user.
 
@@ -35,14 +41,36 @@ defmodule TaskTracker.Users do
       ** (Ecto.NoResultsError)
 
   """
-  def get_user!(id), do: Repo.get!(User, id)
+  #def get_user!(id), do: Repo.get!(User, id)
 
+  def get_user!(id) do
+    # Repo.get!(User, id)
+
+    Repo.one! from u in User,
+    where: u.id == ^id,
+    preload: [:task, :employees]
+  end
 
   def get_user(id), do: Repo.get(User, id)
 
   def get_user_by_email(email) do
     Repo.get_by(User, email: email)
   end
+
+  # This will retrieve all user id's of those users who are managed by the given user id
+    def getMangagedUserIds(id) do
+      IO.puts("I am in the method")
+
+      query = from u in User,
+                where: u.manager ==^id,
+                select: u.id
+      Repo.all(query)
+
+      # fields [:user_id]
+      # from u in User,
+      #   where: u.manager ==^id,
+      #   select: u.id
+    end
 
   @doc """
   Creates a user.
