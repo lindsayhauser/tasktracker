@@ -1,14 +1,11 @@
-<h1>Listing Tasks</h1>
+<h1>Task List:</h1>
 
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Task:</th>
-
-      <th>User Assigned To:</th>
+      <th>Task Title:</th>
+      <th>User Responsible:</th>
       <th>Completed?</th>
-      <th>Hours:</th>
-      <th>Minutes:</th>
       <th></th>
     </tr>
   </thead>
@@ -16,15 +13,15 @@
 <%= for task <- @tasks do %>
     <tr>
       <td><%= task.title %></td>
-
-      <td><%= task.user %></td>
+      <td><%= task.user.email %></td>
       <td><%= task.completed %></td>
-      <td><%= task.time_hours %></td>
-      <td><%= task.time_minutes %></td>
       <td>
         <%= link "Show", to: Routes.task_path(@conn, :show, task), class: "btn btn-secondary" %>
-        <%= link "Edit", to: Routes.task_path(@conn, :edit, task), class: "btn btn-info" %>
-        <%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger" %>
+
+        <%= if @current_user.admin do %>
+          <%= link "Edit", to: Routes.task_path(@conn, :edit, task), class: "btn btn-info" %>
+          <%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger" %>
+        <% end %>
       </td>
     </tr>
 <% end %>

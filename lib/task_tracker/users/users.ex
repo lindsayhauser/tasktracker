@@ -22,9 +22,10 @@ defmodule TaskTracker.Users do
   end
 
   def list_users_managed_over(id) do
+    IO.puts("Got into the method")
     query = from u in User,
-     where: u.id ==^id
-    Repo.all(query)
+     where: u.manager ==^id
+    Repo.all(query) |> Repo.preload([:task, :employees])
   end
 
   @doc """
@@ -62,8 +63,8 @@ defmodule TaskTracker.Users do
       IO.puts("I am in the method")
 
       query = from u in User,
-                where: u.manager ==^id,
-                select: u.id
+        where: u.manager ==^id,
+        select: u.id
       Repo.all(query)
 
       # fields [:user_id]

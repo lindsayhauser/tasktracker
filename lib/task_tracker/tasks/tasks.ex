@@ -7,7 +7,6 @@ defmodule TaskTracker.Tasks do
   alias TaskTracker.Repo
 
   alias TaskTracker.Tasks.Task
-  alias TaskTracker.Timeblocks.Timeblock
 
 
   @doc """
@@ -20,7 +19,7 @@ defmodule TaskTracker.Tasks do
 
   """
   def list_task_list do
-    Repo.all(Task)
+    Repo.all(Task) |> Repo.preload([:user])
   end
 
 # Get all of the tasks who's userid is passed in
@@ -45,9 +44,9 @@ defmodule TaskTracker.Tasks do
   """
   # def get_task!(id), do: Repo.get!(Task, id)
   def get_task!(id) do
-  Repo.one! from t in Timeblock,
+  Repo.one! from t in Task,
     where: t.id == ^id,
-    preload: [:timeblock]
+    preload: [:timeblock, :user]
 end
 
   @doc """

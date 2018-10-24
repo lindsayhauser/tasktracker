@@ -7,15 +7,15 @@ defmodule TaskTrackerWeb.TaskController do
 
 
   def index(conn, _params) do
-    IO.puts("Got here in tasks controller index")
     tasks = Tasks.list_task_list()
-    IO.puts("Got here after tasks cnotroller index")
     render(conn, "index.html", tasks: tasks)
   end
 
   def new(conn, _params) do
     changeset = Tasks.change_task(%Task{})
-    render(conn, "new.html", changeset: changeset)
+    user = TaskTracker.Users.get_user(get_session(conn, :user_id) || -1)
+    manage_user_list = Users.list_users_managed_over(user.id)
+    render(conn, "new.html", changeset: changeset, manage_user_list: manage_user_list)
   end
 
   def create(conn, %{"task" => task_params}) do
@@ -26,7 +26,9 @@ defmodule TaskTrackerWeb.TaskController do
         |> redirect(to: Routes.task_path(conn, :show, task))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        user = TaskTracker.Users.get_user(get_session(conn, :user_id) || -1)
+        manage_user_list = Users.list_users_managed_over(user.id)
+        render(conn, "new.html", changeset: changeset, manage_user_list: manage_user_list)
     end
   end
 
@@ -39,7 +41,8 @@ defmodule TaskTrackerWeb.TaskController do
   def edit(conn, %{"id" => id}) do
     task = Tasks.get_task!(id)
     changeset = Tasks.change_task(task)
-    render(conn, "edit.html", task: task, changeset: changeset)
+    manage_user_list = Users.list_users_managed_over(id)
+    render(conn, "edit.html", task: task, changeset: changeset, manage_user_list: manage_user_list)
   end
 
   def update(conn, %{"id" => id, "task" => task_params}) do
@@ -52,7 +55,8 @@ defmodule TaskTrackerWeb.TaskController do
         |> redirect(to: Routes.task_path(conn, :show, task))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", task: task, changeset: changeset)
+        manage_user_list = Users.list_users_managed_over(id)
+        render(conn, "edit.html", task: task, changeset: changeset, manage_user_list: manage_user_list)
     end
   end
 

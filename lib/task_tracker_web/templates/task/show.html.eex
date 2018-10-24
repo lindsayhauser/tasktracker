@@ -1,37 +1,49 @@
-<h1>Show Task</h1>
+<h1>Task Details:</h1>
 <ul>
 
-  <li>
+<p>
     <strong>Title:</strong>
     <%= @task.title %>
-  </li>
+</p>
 
-  <li>
-    <strong>Desc:</strong>
+<p>
+    <strong>Task Description:</strong>
     <%= @task.desc %>
-  </li>
+</p>
 
-  <li>
+<p>
     <strong>User Assigned:</strong>
-    <%= @task.user %>
-  </li>
+    <%= @task.user.email %>
+</p>
 
-
-  <li>
-    <strong>Time Hours:</strong>
-    <%= @task.time_hours %>
-  </li>
-
-  <li>
-    <strong>Time Minutes (15 minute increments):</strong>
-    <%= @task.time_minutes %>
-  </li>
-
-  <li>
+<p>
     <strong>Completed?:</strong>
     <%= @task.completed %>
-  </li>
+</p>
 
+<br>
+
+<p> Time Blocks:
+</p>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Start Time</th>
+        <th>End Time</th>
+      </tr>
+    </thead>
+    <tbody>
+  <%= for timeblock <- @task.timeblock do %>
+      <tr>
+        <td><%= timeblock.time_start %></td>
+        <td><%= timeblock.time_end %></td>
+        <td>
+          <%= link "Show", to: Routes.timeblock_path(@conn, :show, timeblock.id), class: "btn btn-secondary" %>
+        </td>
+      </tr>
+  <% end %>
+    </tbody>
+  </table>
 </ul>
 
 <span><%= link "Edit", to: Routes.task_path(@conn, :edit, @task) %></span>
