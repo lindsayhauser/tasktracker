@@ -41,7 +41,9 @@ defmodule TaskTrackerWeb.TaskController do
   def edit(conn, %{"id" => id}) do
     task = Tasks.get_task!(id)
     changeset = Tasks.change_task(task)
-    manage_user_list = Users.list_users_managed_over(id)
+    IO.puts(id)
+    user = TaskTracker.Users.get_user(get_session(conn, :user_id) || -1)
+    manage_user_list = Users.list_users_managed_over(user.id)
     render(conn, "edit.html", task: task, changeset: changeset, manage_user_list: manage_user_list)
   end
 
@@ -55,7 +57,8 @@ defmodule TaskTrackerWeb.TaskController do
         |> redirect(to: Routes.task_path(conn, :show, task))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        manage_user_list = Users.list_users_managed_over(id)
+        user = TaskTracker.Users.get_user(get_session(conn, :user_id) || -1)
+        manage_user_list = Users.list_users_managed_over(user.id)
         render(conn, "edit.html", task: task, changeset: changeset, manage_user_list: manage_user_list)
     end
   end
