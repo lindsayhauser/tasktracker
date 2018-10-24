@@ -71,5 +71,10 @@
 </table>
 
 
-<span><%= link "Edit", to: Routes.user_path(@conn, :edit, @user) %></span>
-<span><%= link "Back", to: Routes.user_path(@conn, :index) %></span>
+<span><%= link "Edit User", to: Routes.user_path(@conn, :edit, @user), class: "btn btn-primary" %></span>
+<br>
+<br>
+<span><%= link "Show All Users", to: Routes.user_path(@conn, :index), class: "btn btn-secondary" %></span>
+<br>
+<br>
+<br>

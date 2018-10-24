@@ -17,8 +17,11 @@
 
       <td>
         <%= link "Show", to: Routes.user_path(@conn, :show, user), class: "btn btn-secondary" %>
+
+        <%= if @current_user.admin do %>
         <%= link "Edit", to: Routes.user_path(@conn, :edit, user), class: "btn btn-info" %>
         <%= link "Delete", to: Routes.user_path(@conn, :delete, user), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger" %>
+        <% end %>
       </td>
     </tr>
 <% end %>

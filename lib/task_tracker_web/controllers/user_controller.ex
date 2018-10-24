@@ -13,7 +13,8 @@ defmodule TaskTrackerWeb.UserController do
 
   def new(conn, _params) do
     changeset = Users.change_user(%User{})
-    render(conn, "new.html", changeset: changeset)
+    all_users = Users.list_users;
+    render(conn, "new.html", changeset: changeset, all_users: all_users)
   end
 
   def create(conn, %{"user" => user_params}) do
@@ -25,7 +26,8 @@ defmodule TaskTrackerWeb.UserController do
         |> redirect(to: Routes.user_path(conn, :show, user))  #user
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        all_users = Users.list_users;
+        render(conn, "new.html", changeset: changeset, all_users: all_users)
     end
   end
 
@@ -34,18 +36,19 @@ defmodule TaskTrackerWeb.UserController do
     manager = Users.get_user!(user.manager) # get the user's managers
     ids = Users.getMangagedUserIds(user.id) # get the id's of the underlings
     tasks = Tasks.getTasks(ids);  # get all the tasks of the underlings
-    IO.puts("Got the tasks from the database")
     render(conn, "show.html", user: user, manager: manager, tasks: tasks)
   end
 
   def edit(conn, %{"id" => id}) do
     user = Users.get_user!(id)
     changeset = Users.change_user(user)
-    render(conn, "edit.html", user: user, changeset: changeset)
+    all_users = Users.list_users;
+    render(conn, "edit.html", user: user, changeset: changeset, all_users: all_users)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
     user = Users.get_user!(id)
+    all_users = Users.list_users;
 
     case Users.update_user(user, user_params) do
       {:ok, user} ->
@@ -54,7 +57,7 @@ defmodule TaskTrackerWeb.UserController do
         |> redirect(to: Routes.user_path(conn, :show, user))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", user: user, changeset: changeset)
+        render(conn, "edit.html", user: user, changeset: changeset, all_users: all_users)
     end
   end
 
