@@ -70,7 +70,9 @@
   </tbody>
 </table>
 
-<span><%= link "Edit User", to: Routes.user_path(@conn, :edit, @user), class: "btn btn-primary" %></span>
+<%= if @current_user.admin do %>
+  <span><%= link "Edit User", to: Routes.user_path(@conn, :edit, @user), class: "btn btn-primary" %></span>
+<% end %>
 <br>
 <br>
 <span><%= link "Show All Users", to: Routes.user_path(@conn, :index), class: "btn btn-secondary" %></span>

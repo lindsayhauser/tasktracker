@@ -21,6 +21,11 @@
     <%= @task.completed %>
 </p>
 
+<p>
+    <strong>Completed?:</strong>
+    <%= @task.completed %>
+</p>
+
 <br>
 
 <p> Time Blocks:
