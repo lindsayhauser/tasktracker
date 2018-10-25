@@ -89,7 +89,7 @@ use Mix.Config
 
 # https://github.com/NatTuck/husky_shop/blob/2-deploy/config/prod.exs
 get_secret = fn name ->
-  base = Path.expand("~/.config/task_tracker")
+  base = Path.expand("~/.config/task_tracker2")
   File.mkdir_p!(base)
   path = Path.join(base, name)
   unless File.exists?(path) do
@@ -106,7 +106,7 @@ config :task_tracker, TaskTrackerWeb.Endpoint,
 
 # Configure your database
 config :task_tracker, TaskTracker.Repo,
-  username: "task_tracker",
+  username: "task_tracker2",
   password: get_secret.("db_pass"),
-  database: "task_tracker_prod",
+  database: "task_tracker_prod2",
   pool_size: 15
