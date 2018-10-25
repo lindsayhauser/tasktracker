@@ -2,7 +2,6 @@ defmodule TaskTracker.Timeblocks.Timeblock do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "timeblocks" do
     field :date_start, :date, null: false
     field :time_start, :time, null: false
@@ -10,11 +9,6 @@ defmodule TaskTracker.Timeblocks.Timeblock do
     field :time_end, :time, null: true
     belongs_to :task, TaskTracker.Tasks.Task
     field :currently_ongoing, :boolean  # Does this block have a start time but no end time? (is it currently running)
-
-    #field :task_id, references(:tasks, on_delete: :delete_all), null: false
-    #field :time_end, :naive_datetime
-    #field :time_start, :naive_datetime
-    #field :current_block, :boolean  # Does this block have a start time but no end time? (is it currently running)
 
     timestamps()
   end

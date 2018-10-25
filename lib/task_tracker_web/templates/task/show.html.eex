@@ -18,13 +18,14 @@
 </p>
 <br>
 </ul>
-<h3><strong> Time Blocks:
-</strong>
+<h3>Time Blocks:
+
 </h3>
 <ul>
-  <table class="table table-striped", id="timeBlocks">
+  <table class="table table-striped", id="time_blocks">
     <thead>
       <tr>
+        <th>Block ID</th>
         <th>Start Date</th>
         <th>Start Time</th>
         <th>End Date</th>
@@ -43,23 +44,58 @@
     <br>
   <%= for timeblock <- @task.timeblock do %>
       <tr>
-        <td><input value = "<%= timeblock.date_start %>" </input></td>
-        <td><input value = "<%= timeblock.time_start %>" </input></td>
-        <td><input value = "<%= timeblock.date_end %>" </input></td>
-        <td><input value = "<%= timeblock.time_end %>" </input></td>
+        <td><%= timeblock.id %></td>
+        <td><%= timeblock.date_start %></td>
+        <td><%= timeblock.time_start %></td>
+        <td><%= timeblock.date_end %></td>
+        <td><%= timeblock.time_end %></td>
       </tr>
   <% end %>
-
     </tbody>
   </table>
-  <p><button id="save_times_button"
-      data-user-id="<%= @current_user.id %>"
-      data-task-id="<%= @task.id %>"
-      class="btn btn-secondary"> Save Times
-  </button>
-</p>
 </ul>
 
+<br>
+<br>
+
+<h3>
+  Manually Edit Times:
+</h3>
+<ul>
+<p> Fill Out Information for a Block You Wish to Edit </p>
+<table class="table table-striped", id="time_blocks">
+  <thead>
+    <tr>
+      <th>Block ID</th>
+      <th>Start Date</th>
+      <th>Start Time</th>
+      <th>End Date</th>
+      <th>End Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input id = "block_id_edit"></input></td>
+      <td><input id = "start_date_edit"></input></td>
+      <td><input id = "start_time_edit"></input></td>
+      <td><input id = "end_date_edit"></input></td>
+      <td><input id = "end_time_edit" ></input></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<p> Enter The Block ID of the Block You Wish To Delete </p>
+    <p><input type="number" id="delete_number"
+        class="">
+    </input>
+    <button id="delete_task_button"
+        data-user-id="<%= @current_user.id %>"
+        data-task-id="<%= @task.id %>"
+        class="btn btn-secondary">Delete
+    </button>
+</p>
+</ul>
 
 <span><%= link "Edit", to: Routes.task_path(@conn, :edit, @task) %></span>
 <span><%= link "Back", to: Routes.task_path(@conn, :index) %></span>
