@@ -37,6 +37,17 @@ defmodule TaskTracker.Timeblocks do
   """
   def get_timeblock!(id), do: Repo.get!(Timeblock, id)
 
+
+  # Retrieves the current block for the given task_id. It is possible that there is no
+  # current time_block
+  def getCurrentBlock(id) do
+    query = from t in Timeblock,
+      where: t.task_id ==^id and t.currently_ongoing == true,
+      preload: [:task]
+    Repo.one(query)
+ end
+
+
   @doc """
   Creates a timeblock.
 
@@ -68,6 +79,7 @@ defmodule TaskTracker.Timeblocks do
 
   """
   def update_timeblock(%Timeblock{} = timeblock, attrs) do
+    IO.puts("WE GOT INTO THE QUERY METHOD")
     timeblock
     |> Timeblock.changeset(attrs)
     |> Repo.update()
@@ -101,4 +113,5 @@ defmodule TaskTracker.Timeblocks do
   def change_timeblock(%Timeblock{} = timeblock) do
     Timeblock.changeset(timeblock, %{})
   end
+
 end

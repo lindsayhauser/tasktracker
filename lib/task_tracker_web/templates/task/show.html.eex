@@ -1,55 +1,69 @@
 <h1>Task Details:</h1>
 <ul>
-
 <p>
     <strong>Title:</strong>
     <%= @task.title %>
 </p>
-
 <p>
     <strong>Task Description:</strong>
     <%= @task.desc %>
 </p>
-
 <p>
     <strong>User Assigned:</strong>
     <%= @task.user.email %>
 </p>
-
 <p>
-    <strong>Completed?:</strong>
+    <strong>Completed?</strong>
     <%= @task.completed %>
 </p>
-
-<p>
-    <strong>Completed?:</strong>
-    <%= @task.completed %>
-</p>
-
 <br>
-
-<p> Time Blocks:
-</p>
-  <table class="table table-striped">
+</ul>
+<h3><strong> Time Blocks:
+</strong>
+</h3>
+<ul>
+  <table class="table table-striped", id="timeBlocks">
     <thead>
       <tr>
+        <th>Start Date</th>
         <th>Start Time</th>
+        <th>End Date</th>
         <th>End Time</th>
       </tr>
     </thead>
     <tbody>
+    <button id="stop-end-button"
+        data-user-id="<%= @current_user.id %>"
+        data-task-id="<%= @task.id %>"
+        data-action-id="<%= @has_block %>"
+        class="btn btn-secondary"> <%= if @has_block do %> Stop Working <% else %> Start Working <% end%>
+    </button>
+
+    <br>
+    <br>
   <%= for timeblock <- @task.timeblock do %>
       <tr>
-        <td><%= timeblock.time_start %></td>
-        <td><%= timeblock.time_end %></td>
-        <td>
-          <%= link "Show", to: Routes.timeblock_path(@conn, :show, timeblock.id), class: "btn btn-secondary" %>
-        </td>
+        <td><input value = "<%= timeblock.date_start %>" </input></td>
+        <td><input value = "<%= timeblock.time_start %>" </input></td>
+        <td><input value = "<%= timeblock.date_end %>" </input></td>
+        <td><input value = "<%= timeblock.time_end %>" </input></td>
       </tr>
   <% end %>
+
     </tbody>
   </table>
+  <p><button id="save_times_button"
+      data-user-id="<%= @current_user.id %>"
+      data-task-id="<%= @task.id %>"
+      class="btn btn-secondary"> Save Times
+  </button>
+</p>
 </ul>
+
 
 <span><%= link "Edit", to: Routes.task_path(@conn, :edit, @task) %></span>
 <span><%= link "Back", to: Routes.task_path(@conn, :index) %></span>
+<br>
+<br>
+<br>
+<br>

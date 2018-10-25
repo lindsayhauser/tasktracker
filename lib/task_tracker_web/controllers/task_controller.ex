@@ -4,7 +4,7 @@ defmodule TaskTrackerWeb.TaskController do
   alias TaskTracker.Tasks
   alias TaskTracker.Tasks.Task
   alias TaskTracker.Users
-
+  alias TaskTracker.Timeblocks
 
   def index(conn, _params) do
     tasks = Tasks.list_task_list()
@@ -35,7 +35,14 @@ defmodule TaskTrackerWeb.TaskController do
   def show(conn, %{"id" => id}) do
     task = Tasks.get_task!(id)
     user_list = Users.list_users()
-    render(conn, "show.html", task: task, user_list: user_list)
+    has_block = Timeblocks.getCurrentBlock(id);
+    has_block =
+      if has_block == nil do
+      false
+    else
+      true
+    end
+    render(conn, "show.html", task: task, user_list: user_list, has_block: has_block)
   end
 
   def edit(conn, %{"id" => id}) do

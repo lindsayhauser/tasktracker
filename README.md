@@ -1,13 +1,13 @@
 # TaskTracker
 
 ## Design choices:
-  * When viewing all tasks, descriptions are not displayed. This is because the descriptions may be long and when viewing all of the tasks, the user does not need to view description. If they wish to see the full task, they can click the show button
-  * When creating a task, you are able to enter a user who is not registered for the site. This is because when making tasks, it is not always guaranteed that all assignees have registered on the site already. This also means if a user is deleted from the site, their name stays appearing on the task because we want to keep it for tracking purposes.
-  * For the tasks database resource, the title, description and user fields are strings. The time tracking is kept track of two variables, both ints. time_hours keeps track of the hours a user inputted, and time_minutes keeps track of the minutes a user spent.
-  * On the front end when a user updates the time spent on a task, the UI ensures that they can only enter in minutes of 15 minute increments.
-  * When a new user is created (new email added) I pipe in the changeset `|> unique_constraint(:email)` to validate the email entered.
-  * When creating a task, the only required fields are title and user. This is because a task needs to have a title (otherwise it would be a blank task) and user is who is assigned to it. Description is optional because we don't want to force the user to have to type a description. The times is also optional, because if a task isn't finished yet, then there might not have been any time spent on it. 
-
+  * When Registering a user, it now requires a user to select a manager who will manage them. There is a dropdown of all users provided on the front end such that a user can't register themselves to a user who doesn't exit.
+  * The User's table in the database has a new column called "manager" which is the id of a users already in the system who is the user's managers
+  * A user can be it's own manager - this happens because in a company at some point there is the head of tasks and they don't have a manager. A person who is their own manager can give themselves Tasks.
+  * A manager can now only assign tickets to those users that they manage over. In order to control this, there is a dropdown on the front end such that a user can only select those users whom they have access over to
+  * Nnow, only an admin can see the button that allows them to edit a user's profiel (change manager for example) This is so that a users can't change their settings.
+  howver, the URL calls are still there if a user were to type it in.
+  * The "start working" "stop workig" buttton appears on teh task page. If there is a timeblock open that does not have an end time, then the button will appear as "stop working" and it will end that time block. If there are no current time block open, the button will appear as "start working" and clicking it will cause a new timeblock to be formed.
 
 To start your Phoenix server:
 

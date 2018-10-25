@@ -59,8 +59,9 @@ alias TaskTracker.Timeblocks.Timeblock
 #Repo.insert!(%Timeblock{date_start: DateTime.to_date(DateTime.utc_now), time_start: DateTime.to_time(DateTime.utc_now), date_end: nil, time_end: nil, task_id: 1, currently_ongoing: true})
 
 Repo.insert!(%Timeblock{date_start: (%Date{year: 2018, month: 03, day: 22}),
-time_start: (%Time{hour: 12, minute: 00, second: 00}), date_end: nil, time_end: nil,
-task_id: 1, currently_ongoing: true})
+time_start: (%Time{hour: 12, minute: 00, second: 00}), date_end: (%Date{year: 2018, month: 03, day: 22}),
+ time_end: (%Time{hour: 12, minute: 00, second: 00}),
+task_id: 2, currently_ongoing: false})
 
 
 

@@ -60,17 +60,10 @@ defmodule TaskTracker.Users do
 
   # This will retrieve all user id's of those users who are managed by the given user id
     def getMangagedUserIds(id) do
-      IO.puts("I am in the method")
-
       query = from u in User,
         where: u.manager ==^id,
         select: u.id
       Repo.all(query)
-
-      # fields [:user_id]
-      # from u in User,
-      #   where: u.manager ==^id,
-      #   select: u.id
     end
 
   @doc """
