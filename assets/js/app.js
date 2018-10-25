@@ -27,6 +27,7 @@ $(function () {
 
     let text = JSON.stringify({
       timeblock: {
+        manual: false,
         user_id: user_id,
         task_id: task_id,
         stop_end_button: true
@@ -62,10 +63,9 @@ $(function () {
   });
 });
 
-// Update the UI times
+// Deleting a time block
 $(function () {
   $('#delete_task_button').click((ev) => {
-
     let timeblock_id = $('#delete_number').val()
 
     let text = JSON.stringify({
@@ -83,29 +83,60 @@ $(function () {
       location.reload(true)
     },
   });
-
-    // $('#time_blocks tr').each(function(){
-    // $(this).find('td').each(function(){
-    //   var input = $(this).get(0)
-    //   console.log(input)
-
-      // let text = JSON.stringify({
-      //   timeblock: {
-      //     user_id: user_id,
-      //     task_id: task_id,
-      //     stop_end_button: false
-      //   },
-      // });
-
-  //   })
-  // })
-    //console.log(table_contents)
-  //   let text = JSON.stringify({
-  //     timeblock: {
-  //       user_id: user_id,
-  //       task_id: task_id
-  //     },
-  //   });
-  //
   });
+});
+
+// Updating a time block
+$(function () {
+  $('#update_time_button').click((ev) => {
+    let timeblock_id = $('#block_id_edit').val()
+    let start_date_year = $('#start_date_year').val()
+    let start_date_month = $('#start_date_month').val()
+    let start_date_day = $('#start_date_day').val()
+    let start_time_hour = $('#start_time_hour').val()
+    let start_time_minute = $('#start_time_minute').val()
+    let start_time_second = $('#start_time_second').val()
+    let end_date_year = $('#end_date_year').val()
+    let end_date_month = $('#end_date_month').val()
+    let end_date_day = $('#end_date_day').val()
+    let end_time_hour = $('#end_time_hour').val()
+    let end_time_minute = $('#end_time_minute').val()
+    let end_time_second = $('#end_time_second').val()
+
+    let currently_ongoing = false
+
+    let text = JSON.stringify({
+      timeblock: {
+        manual: true,
+        timeblock_id: timeblock_id,
+        start_date_year: start_date_year,
+        start_date_month: start_date_month,
+        start_date_day: start_date_day,
+        start_time_hour: start_time_hour,
+        start_time_minute: start_time_minute,
+        start_time_second: start_time_second,
+        end_date_year: end_date_year,
+        end_date_month: end_date_month,
+        end_date_day: end_date_day,
+        end_time_hour: end_time_hour,
+        end_time_minute: end_time_minute,
+        end_time_second: end_time_second,
+        currently_ongoing: currently_ongoing
+      },
+    });
+
+    console.log("sending the ajax call")
+    console.log(timeblock_id)
+    console.log("??")
+    $.ajax(`ajax/timeblocks/${timeblock_id}`, {
+    method: "put",
+    dataType: "json",
+    contentType: "application/json; charset=UTF-8",
+    data: text,
+    success: (resp) => {
+      console.log("Successfully got back from the thing after deleting")
+      location.reload(true)
+    },
+  });
+});
 });

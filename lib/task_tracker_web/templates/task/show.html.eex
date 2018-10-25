@@ -39,7 +39,6 @@
         data-action-id="<%= @has_block %>"
         class="btn btn-secondary"> <%= if @has_block do %> Stop Working <% else %> Start Working <% end%>
     </button>
-
     <br>
     <br>
   <%= for timeblock <- @task.timeblock do %>
@@ -54,35 +53,60 @@
     </tbody>
   </table>
 </ul>
-
 <br>
 <br>
-
 <h3>
   Manually Edit Times:
 </h3>
 <ul>
 <p> Fill Out Information for a Block You Wish to Edit </p>
+<p> Block ID <td><input id = "block_id_edit" type="number"></input></td></p>
 <table class="table table-striped", id="time_blocks">
   <thead>
     <tr>
-      <th>Block ID</th>
-      <th>Start Date</th>
-      <th>Start Time</th>
-      <th>End Date</th>
-      <th>End Time</th>
+      <th>Start Year</th>
+      <th>Start Month</th>
+      <th>Start Day</th>
+      <th>Start Hour</th>
+      <th>Start Minute</th>
+      <th>Start Second</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+      <td><input type= "number" id = "start_date_year" ></input></td>
+      <td><input type= "number" id = "start_date_month"></input></td>
+      <td><input type= "number" id = "start_date_day"></input></td>
+      <td><input type= "number" id = "start_time_hour" value = "00"></input></td>
+      <td><input type= "number" id = "start_time_minute" value = "00"></input></td>
+      <td><input type= "number" id = "start_time_second" value = "00"></input></td>
+</tr>
+  </tbody>
+</table>
+
+<table class="table table-striped", id="time_blocks">
+  <thead>
+    <tr>
+      <th>End Year</th>
+      <th>End Month</th>
+      <th>End Day</th>
+      <th>End Hour</th>
+      <th>End Minute</th>
+      <th>End Second</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><input id = "block_id_edit"></input></td>
-      <td><input id = "start_date_edit"></input></td>
-      <td><input id = "start_time_edit"></input></td>
-      <td><input id = "end_date_edit"></input></td>
-      <td><input id = "end_time_edit" ></input></td>
+      <td><input type= "number" id = "end_date_year"></input></td>
+      <td><input type= "number" id = "end_date_month"></input></td>
+      <td><input type= "number" id = "end_date_day" ></input></td>
+      <td><input type= "number" id = "end_time_hour" value = "00" ></input></td>
+      <td><input type= "number" id = "end_time_minute" value = "00"></input></td>
+      <td><input type= "number" id = "end_time_second" value = "00"></input></td>
     </tr>
   </tbody>
 </table>
+
 <button id="update_time_button"
     data-user-id="<%= @current_user.id %>"
     data-task-id="<%= @task.id %>"
@@ -104,8 +128,9 @@
 </p>
 </ul>
 
-<span><%= link "Edit", to: Routes.task_path(@conn, :edit, @task) %></span>
-<span><%= link "Back", to: Routes.task_path(@conn, :index) %></span>
+<span><%= link "Edit Task", to: Routes.task_path(@conn, :edit, @task) %></span>
+<span> | </span>
+<span><%= link "See All Tasks", to: Routes.task_path(@conn, :index) %></span>
 <br>
 <br>
 <br>
