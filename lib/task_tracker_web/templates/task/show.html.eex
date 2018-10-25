@@ -83,6 +83,13 @@
     </tr>
   </tbody>
 </table>
+<button id="update_time_button"
+    data-user-id="<%= @current_user.id %>"
+    data-task-id="<%= @task.id %>"
+    class="btn btn-primary">Update Time
+</button>
+<br>
+<br>
 <br>
 <br>
 <p> Enter The Block ID of the Block You Wish To Delete </p>
@@ -92,7 +99,7 @@
     <button id="delete_task_button"
         data-user-id="<%= @current_user.id %>"
         data-task-id="<%= @task.id %>"
-        class="btn btn-secondary">Delete
+        class="btn btn-primary">Delete
     </button>
 </p>
 </ul>
