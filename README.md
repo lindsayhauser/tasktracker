@@ -1,29 +1,30 @@
 # TaskTracker
 
 ## Design choices:
-  * When Registering a user, it now requires a user to select a manager who will manage them. There is a dropdown of all users provided on the front end such that a user can't register themselves to a user who doesn't exit.
-  * The User's table in the database has a new column called "manager" which is the id of a users already in the system who is the user's managers
-  * A user can be it's own manager - this happens because in a company at some point there is the head of tasks and they don't have a manager. A person who is their own manager can give themselves Tasks.
-  * A manager can now only assign tickets to those users that they manage over. In order to control this, there is a dropdown on the front end such that a user can only select those users whom they have access over to
-  * Nnow, only an admin can see the button that allows them to edit a user's profiel (change manager for example) This is so that a users can't change their settings.
-  howver, the URL calls are still there if a user were to type it in.
-  * The "start working" "stop workig" buttton appears on teh task page. If there is a timeblock open that does not have an end time, then the button will appear as "stop working" and it will end that time block. If there are no current time block open, the button will appear as "start working" and clicking it will cause a new timeblock to be formed.
 
-To start your Phoenix server:
+Notable Example Users in App:
+`dumbledore@example.com` is the only admin user
+`mcgonagall@example.com` manages over 3 different users
+`hagrid@example.com` does not manage over anyone
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
-  * Install Node.js dependencies with `cd assets && npm install`
-  * Start Phoenix endpoint with `mix phx.server`
+Registering Users:
+  * When registering a user, it now requires a user to select a manager who will manage them. There is a dropdown of all users provided on the front end such that a user can't register themselves to a user who doesn't exit.
+  * The User's table in the database has a new column called "manager" which is the id of a users already in the system who is the user's manager.
+  * A user can only have one manager.
+  * A user can be his or her own manager - this is because a user might not have a manager (they could be CEO of a company).
+  * A person who is their own manager can assign themselves Tasks since they manage themselves and want to track their own tasks
+  * A manager can only assign tickets to those users that they manage over. In order to control this, there is a dropdown on the front end such that when assigning a user, a manager can only see a dropdown of users that they have access to
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+Showing Users / User Profile
+  * When clicking "Users" tab, only an admin user can see the edit and delete buttons that allow them to change a user's profile, so that a normal user cannot change their profile. However, the URL calls are still there if a user were to type it in to edit a user.
+  * A user's profile page shows the people that they manage (their underlings), and also a list of tasks (Task Report) of the status of tasks that their underlings have been assigned.
+  * There are button links to the user pages that this user manages over and links to the underling's tasks in the task report.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+Tasks:
+  * The "start working" "stop working" button appears on a task's page. If there is a timeblock open that does not have an end time, then the button will appear as "stop working" and it will end that time block when clicked. If there are no current time block open, the button will appear as "start working" and clicking it will cause a new timeblock to be formed.
+  * Upon clicking the stop working/start working button, the UI automatically refreshes so that the user can see the changes immediately.
+  * In order to edit a timeblock, a user must scroll to the `Manually Edit Times:` section on a task's page and enter the timeblock id and new vales in each field in the fields. Upon clicking the `Update Time` button, the UI will refresh. If there is no UI refresh, the update did not go through due to a input error.
+  * In order to fully delete a timeblock, enter the timeblock id in the input field next to the delete button and click `Delete`. If the timeblock id is correct, the UI will update and changes will be reflected.
 
-## Learn more
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+#

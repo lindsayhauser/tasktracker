@@ -15,6 +15,8 @@ alias TaskTracker.Users.User
 alias TaskTracker.Tasks.Task
 alias TaskTracker.Timeblocks.Timeblock
 
+# These are example data to be inserted into the DB. Currently commented it out because it has already been run.
+
 #Repo.insert!(%User{email: "alice@example.com", admin: true, manager: 1})
 #Repo.insert!(%User{email: "bob@example.com", admin: false, manager: 1})
 #Repo.insert!(%Task{completed: false, desc: "The newest homework for object oriented design", title: "Finish OOD Homework", user_id: 1})
@@ -53,44 +55,26 @@ alias TaskTracker.Timeblocks.Timeblock
 # belongs_to :task, TaskTracker.Tasks.Task
 # field :currently_ongoing, :boolean  # Does this block have a start time but no end time? (is it currently running)
 
+#
+# Repo.insert!(%Timeblock{date_start: Date.cast("2018-02-20"), time_start: Time.cast("12:00:00"), date_end: nil, time_end: nil, task_id: 1, currently_ongoing: true})
+#
+# Repo.insert!(%Timeblock{date_start: DateTime.to_date(DateTime.utc_now), time_start: DateTime.to_time(DateTime.utc_now), date_end: nil, time_end: nil, task_id: 1, currently_ongoing: true})
 
-#Repo.insert!(%Timeblock{date_start: Date.cast("2018-02-20"), time_start: Time.cast("12:00:00"), date_end: nil, time_end: nil, task_id: 1, currently_ongoing: true})
-
-#Repo.insert!(%Timeblock{date_start: DateTime.to_date(DateTime.utc_now), time_start: DateTime.to_time(DateTime.utc_now), date_end: nil, time_end: nil, task_id: 1, currently_ongoing: true})
-
-Repo.insert!(%Timeblock{date_start: (%Date{year: 2018, month: 03, day: 22}),
-time_start: (%Time{hour: 12, minute: 00, second: 00}), date_end: (%Date{year: 2018, month: 03, day: 22}),
- time_end: (%Time{hour: 12, minute: 00, second: 00}),
-task_id: 2, currently_ongoing: false})
-
-
-Repo.insert!(%Timeblock{date_start: (%Date{year: 2018, month: 03, day: 22}),
-time_start: (%Time{hour: 12, minute: 00, second: 00}), date_end: (%Date{year: 2018, month: 03, day: 22}),
- time_end: (%Time{hour: 12, minute: 00, second: 00}),
-task_id: 1, currently_ongoing: false})
-
-
-Repo.insert!(%Timeblock{date_start: (%Date{year: 2018, month: 03, day: 22}),
-time_start: (%Time{hour: 12, minute: 00, second: 00}), date_end: (%Date{year: 2018, month: 03, day: 22}),
- time_end: (%Time{hour: 12, minute: 00, second: 00}),
-task_id: 1, currently_ongoing: false})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Repo.insert!(%Timeblock{date_start: (%Date{year: 2018, month: 03, day: 22}),
+# time_start: (%Time{hour: 12, minute: 00, second: 00}), date_end: (%Date{year: 2018, month: 03, day: 22}),
+#  time_end: (%Time{hour: 12, minute: 00, second: 00}),
+# task_id: 2, currently_ongoing: false})
+#
+#
+# Repo.insert!(%Timeblock{date_start: (%Date{year: 2018, month: 03, day: 22}),
+# time_start: (%Time{hour: 12, minute: 00, second: 00}), date_end: (%Date{year: 2018, month: 03, day: 22}),
+#  time_end: (%Time{hour: 12, minute: 00, second: 00}),
+# task_id: 1, currently_ongoing: false})
+#
+# Repo.insert!(%Timeblock{date_start: (%Date{year: 2018, month: 03, day: 22}),
+# time_start: (%Time{hour: 12, minute: 00, second: 00}), date_end: (%Date{year: 2018, month: 03, day: 22}),
+#  time_end: (%Time{hour: 12, minute: 00, second: 00}),
+# task_id: 1, currently_ongoing: false})
 
 
 
