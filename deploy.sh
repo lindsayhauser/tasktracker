@@ -1,4 +1,4 @@
-export PORT=4747
+export PORT=4748
 export NODEBIN=`pwd`/assets/node_modules/.bin
 export PATH="$PATH:$NODEBIN"
 export MIX_ENV=prod
