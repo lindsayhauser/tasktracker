@@ -14,6 +14,7 @@ Registering Users:
   * The User's table in the database has a new column called "manager" which is the id of a users already in the system who is the user's manager.
   * A user can only have one manager.
   * A user can be his or her own manager - this is because a user might not have a manager (they could be CEO of a company).
+  * A user who doesn't manager over themselves cannot assign themselves tasks.
   * A person who is their own manager can assign themselves Tasks since they manage themselves and want to track their own tasks
   * A manager can only assign tickets to those users that they manage over. In order to control this, there is a dropdown on the front end such that when assigning a user, a manager can only see a dropdown of users that they have access to
 
