@@ -2,7 +2,7 @@
 
 ## Design choices:
 
-Notable Example Users in App:
+Notable Example Users in App: http://tasks2.lindsayhauser.com/
   * `dumbledore@example.com` is the only admin user
   * `mcgonagall@example.com` manages over 3 different users
   * `hagrid@example.com` does not manage over anyone
