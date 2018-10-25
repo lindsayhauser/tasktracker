@@ -3,9 +3,9 @@
 ## Design choices:
 
 Notable Example Users in App:
-`dumbledore@example.com` is the only admin user
-`mcgonagall@example.com` manages over 3 different users
-`hagrid@example.com` does not manage over anyone
+  * `dumbledore@example.com` is the only admin user
+  * `mcgonagall@example.com` manages over 3 different users
+  * `hagrid@example.com` does not manage over anyone
 
 UI Design:
 
